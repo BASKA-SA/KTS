@@ -1,0 +1,23 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+@if (Model.ShowRequestID) {
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestID</code>
+    </p>
+}
+@if (Model.ShowExceptionMessage) {
+    <p>
+        <strong>Error Message:</strong> <code>@Model.ExceptionMessage</code>
+    </p>
+}
+@if (User.IsInRole(KarateTournamentSoftware.Other.Constants.RoleNameAdmin)) {
+    <p>
+        <strong>Full Exception:</strong> <pre>@Model.ExceptionFull</pre>
+    </p>
+}
