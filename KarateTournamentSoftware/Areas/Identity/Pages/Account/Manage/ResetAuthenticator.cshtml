@@ -6,7 +6,7 @@
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
-<h3>@ViewData["Title"]</h3>
+<h4>@ViewData["Title"]</h4>
 <div class="alert alert-warning" role="alert">
     <p>
         <span class="glyphicon glyphicon-warning-sign"></span>
@@ -18,7 +18,7 @@
     </p>
 </div>
 <div>
-    <form id="reset-authenticator-form" method="post">
+    <form id="reset-authenticator-form" method="post" class="form-group">
         <button id="reset-authenticator-button" class="btn btn-danger" type="submit">Reset authenticator key</button>
     </form>
 </div>
