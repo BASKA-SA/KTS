@@ -26,5 +26,10 @@ namespace KarateTournamentSoftware.Controllers {
                 ExceptionFull = exception?.ToString(),
             });
         }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult HttpError(int? code) {
+            return View(new HttpErrorModel(code));
+        }
     }
 }

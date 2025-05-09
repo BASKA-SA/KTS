@@ -38,6 +38,7 @@ namespace KarateTournamentSoftware {
             }
 
             app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute($"/Home/{nameof(Controllers.HomeController.HttpError)}", "?code={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
