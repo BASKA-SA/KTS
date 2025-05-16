@@ -19,18 +19,18 @@ namespace KarateTournamentSoftware.Areas.Identity.Pages.Account.Manage {
             _signInManager = signInManager;
         }
 
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         [TempData]
-        public string StatusMessage { get; set; }
+        public string? StatusMessage { get; set; }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel? Input { get; set; }
 
         public class InputModel {
             [Phone]
             [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            public string? PhoneNumber { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user) {
@@ -66,8 +66,8 @@ namespace KarateTournamentSoftware.Areas.Identity.Pages.Account.Manage {
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber) {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            if (Input?.PhoneNumber != phoneNumber) {
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input?.PhoneNumber);
                 if (!setPhoneResult.Succeeded) {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();

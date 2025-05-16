@@ -22,17 +22,17 @@ namespace KarateTournamentSoftware.Areas.Identity.Pages.Account {
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel? Input { get; set; }
 
         public class InputModel {
             [Required]
             [EmailAddress]
-            public string Email { get; set; }
+            public string? Email { get; set; }
         }
 
         public async Task<IActionResult> OnPostAsync() {
             if (ModelState.IsValid) {
-                var user = await _userManager.FindByEmailAsync(Input.Email);
+                var user = await _userManager.FindByEmailAsync(Input?.Email!);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user))) {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
@@ -46,10 +46,10 @@ namespace KarateTournamentSoftware.Areas.Identity.Pages.Account {
                     "/Account/ResetPassword",
                     pageHandler: null,
                     values: new { area = "Identity", code },
-                    protocol: Request.Scheme);
+                    protocol: Request.Scheme)!;
 
                 await _emailSender.SendEmailAsync(
-                    Input.Email,
+                    Input?.Email!,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 

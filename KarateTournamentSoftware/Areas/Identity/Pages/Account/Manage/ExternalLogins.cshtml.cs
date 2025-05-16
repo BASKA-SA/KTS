@@ -25,14 +25,14 @@ namespace KarateTournamentSoftware.Areas.Identity.Pages.Account.Manage {
             _userStore = userStore;
         }
 
-        public IList<UserLoginInfo> CurrentLogins { get; set; }
+        public IList<UserLoginInfo>? CurrentLogins { get; set; }
 
-        public IList<AuthenticationScheme> OtherLogins { get; set; }
+        public IList<AuthenticationScheme>? OtherLogins { get; set; }
 
         public bool ShowRemoveButton { get; set; }
 
         [TempData]
-        public string StatusMessage { get; set; }
+        public string? StatusMessage { get; set; }
 
         public async Task<IActionResult> OnGetAsync() {
             var user = await _userManager.GetUserAsync(User);
@@ -45,7 +45,7 @@ namespace KarateTournamentSoftware.Areas.Identity.Pages.Account.Manage {
                 .Where(auth => CurrentLogins.All(ul => auth.Name != ul.LoginProvider))
                 .ToList();
 
-            string passwordHash = null;
+            string? passwordHash = null;
             if (_userStore is IUserPasswordStore<IdentityUser> userPasswordStore) {
                 passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
             }
