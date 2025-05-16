@@ -12,7 +12,10 @@ namespace KarateTournamentSoftware.Areas.Identity {
                 services.AddDbContext<Data.AppDBContext>(options =>
                     options.UseSqlServer(context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Data.AppDBContext>();
+                services.AddIdentity<IdentityUser, IdentityRole>(options => {
+                    options.User.RequireUniqueEmail = true;
+                    options.SignIn.RequireConfirmedAccount = true; //                      .AddDefaultUI is required for some files that are not scaffolded, see https://stackoverflow.com/a/65017563/2999220
+                }).AddEntityFrameworkStores<Data.AppDBContext>().AddDefaultTokenProviders().AddDefaultUI();
             });
         }
     }
