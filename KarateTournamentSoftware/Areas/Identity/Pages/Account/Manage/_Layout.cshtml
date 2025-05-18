@@ -9,6 +9,9 @@
 <h2>Manage your account</h2>
 
 <div>
+    <div style="float: right;">
+        <a class="btn btn-info btn-wide" asp-page="./RefreshRoles" asp-route-returnurl="./@System.IO.Path.GetFileNameWithoutExtension(ViewContext.ActionDescriptor.DisplayName)">Refresh Access</a>
+    </div>
     <h4>Change your account settings</h4>
     <hr />
     <div class="row">
