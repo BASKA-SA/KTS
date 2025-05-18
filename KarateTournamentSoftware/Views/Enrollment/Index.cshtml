@@ -1,0 +1,45 @@
+@model Dictionary<string, IList<Microsoft.AspNetCore.Identity.IdentityUser>>
+@{
+    ViewData["Title"] = "User Role Enrollments";
+    Layout = "_Layout";
+}
+
+<style>
+    .table td, .table th {
+        vertical-align: middle;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+<p>
+    <a class="btn btn-primary btn-wide" asp-action="Create">Add</a> | <a class="btn btn-primary btn-wide" asp-action="Users">User List</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th style="background-color: lightgray;">User Email</th>
+            <th style="background-color: lightgray;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var (roleName, users) in Model) {
+            <tr>
+                <th colspan="3">
+                    @roleName
+                </th>
+            </tr>
+            @foreach (var user in users) {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        <form asp-action="Delete">
+                            <input type="hidden" name="roleName" value="@roleName" />
+                            <input type="hidden" name="user" value="@user.Id" />
+                            <input type="submit" value="Delete" class="btn btn-danger btn-wide" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

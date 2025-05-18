@@ -1,0 +1,44 @@
+@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "_Layout";
+}
+
+<style>
+    .table td, .table th {
+        vertical-align: middle;
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email Address</th>
+            <th>Phone Number</th>
+            <th>2FA Enabled</th>
+            <th>Access Failed Count</th>
+            <th>Lockout End</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model) {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email (@(user.EmailConfirmed ? "Confirmed" : "Unconfirmed"))</td>
+                <td>@user.PhoneNumber (@(user.PhoneNumberConfirmed ? "Confirmed" : "Unconfirmed"))</td>
+                <td>@user.TwoFactorEnabled</td>
+                <td>@user.AccessFailedCount</td>
+                <td>@user.LockoutEnd</td>
+                <td>
+                    <form asp-action="DeleteUser">
+                        <input type="hidden" name="userID" value="@user.Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger btn-wide" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
